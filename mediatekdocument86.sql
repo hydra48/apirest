@@ -27,14 +27,12 @@ SET time_zone = "+00:00";
 -- Structure de la table `abonnement`
 --
 
-DROP TABLE IF EXISTS `abonnement`;
-CREATE TABLE IF NOT EXISTS `abonnement` (
-  `id` varchar(5) NOT NULL,
-  `dateFinAbonnement` date DEFAULT NULL,
-  `idRevue` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idRevue` (`idRevue`)
+CREATE TABLE abonnement (
+  id varchar(5) NOT NULL,
+  dateFinAbonnement date DEFAULT NULL,
+  idRevue varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 --
 -- Déchargement des données de la table `abonnement`
@@ -80,14 +78,11 @@ DELIMITER ;
 -- Structure de la table `commande`
 --
 
-DROP TABLE IF EXISTS `commande`;
-CREATE TABLE IF NOT EXISTS `commande` (
-  `id` varchar(5) NOT NULL,
-  `dateCommande` date DEFAULT NULL,
-  `montant` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE commande (
+  id varchar(5) NOT NULL,
+  dateCommande date DEFAULT NULL,
+  montant double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Déchargement des données de la table `commande`
 --
@@ -113,17 +108,13 @@ INSERT INTO `commande` (`id`, `dateCommande`, `montant`) VALUES
 --
 -- Structure de la table `commandedocument`
 --
-
-DROP TABLE IF EXISTS `commandedocument`;
-CREATE TABLE IF NOT EXISTS `commandedocument` (
-  `id` varchar(5) NOT NULL,
-  `nbExemplaire` int(11) DEFAULT NULL,
-  `idLivreDvd` varchar(10) NOT NULL,
-  `idSuivi` char(5) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idLivreDvd` (`idLivreDvd`),
-  KEY `idSuivi` (`idSuivi`)
+CREATE TABLE commandedocument (
+  id varchar(5) NOT NULL,
+  nbExemplaire int(11) DEFAULT NULL,
+  idLivreDvd varchar(10) NOT NULL,
+  idSuivi char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 --
 -- Déchargement des données de la table `commandedocument`
@@ -194,18 +185,14 @@ DELIMITER ;
 -- Structure de la table `document`
 --
 
-DROP TABLE IF EXISTS `document`;
-CREATE TABLE IF NOT EXISTS `document` (
-  `id` varchar(10) NOT NULL,
-  `titre` varchar(60) DEFAULT NULL,
-  `image` varchar(500) DEFAULT NULL,
-  `idRayon` varchar(5) NOT NULL,
-  `idPublic` varchar(5) NOT NULL,
-  `idGenre` varchar(5) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idRayon` (`idRayon`),
-  KEY `idPublic` (`idPublic`),
-  KEY `idGenre` (`idGenre`)
+
+CREATE TABLE document (
+  id varchar(10) NOT NULL,
+  titre varchar(60) DEFAULT NULL,
+  image varchar(500) DEFAULT NULL,
+  idRayon varchar(5) NOT NULL,
+  idPublic varchar(5) NOT NULL,
+  idGenre varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -264,15 +251,13 @@ INSERT INTO `document` (`id`, `titre`, `image`, `idRayon`, `idPublic`, `idGenre`
 -- Structure de la table `dvd`
 --
 
-DROP TABLE IF EXISTS `dvd`;
-CREATE TABLE IF NOT EXISTS `dvd` (
-  `id` varchar(10) NOT NULL,
-  `synopsis` text,
-  `realisateur` varchar(20) DEFAULT NULL,
-  `duree` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE dvd (
+  id varchar(10) NOT NULL,
+  synopsis text,
+  realisateur varchar(20) DEFAULT NULL,
+  duree int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Déchargement des données de la table `dvd`
 --
@@ -288,11 +273,10 @@ INSERT INTO `dvd` (`id`, `synopsis`, `realisateur`, `duree`) VALUES
 -- Structure de la table `etat`
 --
 
-DROP TABLE IF EXISTS `etat`;
-CREATE TABLE IF NOT EXISTS `etat` (
-  `id` char(5) NOT NULL,
-  `libelle` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+
+CREATE TABLE etat (
+  id char(5) NOT NULL,
+  libelle varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -311,15 +295,13 @@ INSERT INTO `etat` (`id`, `libelle`) VALUES
 -- Structure de la table `exemplaire`
 --
 
-DROP TABLE IF EXISTS `exemplaire`;
-CREATE TABLE IF NOT EXISTS `exemplaire` (
-  `id` varchar(10) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `dateAchat` date DEFAULT NULL,
-  `photo` varchar(500) NOT NULL,
-  `idEtat` char(5) NOT NULL,
-  PRIMARY KEY (`id`,`numero`),
-  KEY `idEtat` (`idEtat`)
+
+CREATE TABLE exemplaire (
+  id varchar(10) NOT NULL,
+  numero int(11) NOT NULL,
+  dateAchat date DEFAULT NULL,
+  photo varchar(500) NOT NULL,
+  idEtat char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -379,11 +361,11 @@ INSERT INTO `exemplaire` (`id`, `numero`, `dateAchat`, `photo`, `idEtat`) VALUES
 -- Structure de la table `genre`
 --
 
-DROP TABLE IF EXISTS `genre`;
-CREATE TABLE IF NOT EXISTS `genre` (
-  `id` varchar(5) NOT NULL,
-  `libelle` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+
+
+CREATE TABLE genre (
+  id varchar(5) NOT NULL,
+  libelle varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -417,13 +399,12 @@ INSERT INTO `genre` (`id`, `libelle`) VALUES
 -- Structure de la table `livre`
 --
 
-DROP TABLE IF EXISTS `livre`;
-CREATE TABLE IF NOT EXISTS `livre` (
-  `id` varchar(10) NOT NULL,
-  `ISBN` varchar(13) DEFAULT NULL,
-  `auteur` varchar(20) DEFAULT NULL,
-  `collection` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+
+CREATE TABLE livre (
+  id varchar(10) NOT NULL,
+  ISBN varchar(13) DEFAULT NULL,
+  auteur varchar(20) DEFAULT NULL,
+  collection varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -464,12 +445,10 @@ INSERT INTO `livre` (`id`, `ISBN`, `auteur`, `collection`) VALUES
 -- Structure de la table `livres_dvd`
 --
 
-DROP TABLE IF EXISTS `livres_dvd`;
-CREATE TABLE IF NOT EXISTS `livres_dvd` (
-  `id` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE livres_dvd (
+  id varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Déchargement des données de la table `livres_dvd`
 --
@@ -513,11 +492,10 @@ INSERT INTO `livres_dvd` (`id`) VALUES
 -- Structure de la table `public`
 --
 
-DROP TABLE IF EXISTS `public`;
-CREATE TABLE IF NOT EXISTS `public` (
-  `id` varchar(5) NOT NULL,
-  `libelle` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+
+CREATE TABLE public (
+  id varchar(5) NOT NULL,
+  libelle varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -536,13 +514,11 @@ INSERT INTO `public` (`id`, `libelle`) VALUES
 -- Structure de la table `rayon`
 --
 
-DROP TABLE IF EXISTS `rayon`;
-CREATE TABLE IF NOT EXISTS `rayon` (
-  `id` char(5) NOT NULL,
-  `libelle` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE rayon (
+  id char(5) NOT NULL,
+  libelle varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Déchargement des données de la table `rayon`
 --
@@ -570,12 +546,12 @@ INSERT INTO `rayon` (`id`, `libelle`) VALUES
 -- Structure de la table `revue`
 --
 
-DROP TABLE IF EXISTS `revue`;
-CREATE TABLE IF NOT EXISTS `revue` (
-  `id` varchar(10) NOT NULL,
-  `periodicite` varchar(2) DEFAULT NULL,
-  `delaiMiseADispo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+
+
+CREATE TABLE revue (
+  id varchar(10) NOT NULL,
+  periodicite varchar(2) DEFAULT NULL,
+  delaiMiseADispo int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -628,11 +604,9 @@ DELIMITER ;
 -- Structure de la table `service`
 --
 
-DROP TABLE IF EXISTS `service`;
-CREATE TABLE IF NOT EXISTS `service` (
-  `id` char(10) NOT NULL,
-  `libelle` char(55) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE  `service` (
+  id char(10) NOT NULL,
+  libelle char(55) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -651,11 +625,9 @@ INSERT INTO `service` (`id`, `libelle`) VALUES
 -- Structure de la table `suivi`
 --
 
-DROP TABLE IF EXISTS `suivi`;
-CREATE TABLE IF NOT EXISTS `suivi` (
-  `id` varchar(5) NOT NULL,
-  `libelle` varchar(55) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE  `suivi` (
+  id char(5) NOT NULL,
+  libelle varchar(55) DEFAULT NULL  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -674,14 +646,11 @@ INSERT INTO `suivi` (`id`, `libelle`) VALUES
 -- Structure de la table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `login` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idService` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idService` (`idService`)
+CREATE TABLE  `utilisateur` (
+  id varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  login varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  password varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  idService varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL  
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
