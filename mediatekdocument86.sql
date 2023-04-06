@@ -239,7 +239,7 @@ INSERT INTO `document` (`id`, `titre`, `image`, `idRayon`, `idPublic`, `idGenre`
 ('00024', 'Pavillon noir', '', 'BD001', '00002', '10001'),
 ('00025', 'L\'archipel du danger', '', 'BD001', '00002', '10001'),
 ('00026', 'La planète des singes', '', 'LV002', '00003', '10002'),
-('00027', 'Samantha est obligée de corriger ses erreurs', '', 'BD001', '00004', '10018'),
+('00027', 'Sami est obligé de corriger ses erreurs', '', 'BD001', '00004', '10018'),
 ('00028', 'Ajout d\'un livre', '', 'BL001', '00002', '10009'),
 ('10001', 'Arts Magazine', '', 'PR002', '00002', '10016'),
 ('10002', 'Alternatives Economiques', '', 'PR002', '00002', '10015'),
@@ -438,7 +438,7 @@ INSERT INTO `livre` (`id`, `ISBN`, `auteur`, `collection`) VALUES
 ('00005', '3214563214563', 'RJ Ellory', ''),
 ('00006', '3213213211232', 'Edgar P. Jacobs', 'Blake et Mortimer'),
 ('00007', '6541236987541', 'Kate Atkinson', ''),
-('00008', '1236987456321', 'Jean d\'Ormesson', ''),
+('00008', '1236987456321', 'Jean d Ormesson', ''),
 ('00009', '', 'Fred Vargas', 'Commissaire Adamsberg'),
 ('00010', '', 'Manon Moreau', ''),
 ('00011', '', 'Victoria Hislop', ''),
@@ -457,7 +457,7 @@ INSERT INTO `livre` (`id`, `ISBN`, `auteur`, `collection`) VALUES
 ('00024', '', 'Ayrolles - Masbou', 'De cape et de crocs'),
 ('00025', '', 'Ayrolles - Masbou', 'De cape et de crocs'),
 ('00026', '', 'Pierre Boulle', 'Julliard'),
-('00027', '1234569877896', 'Samantha Dhaussy', 'SIO'),
+('00027', '1234569877896', 'Sami Deluc', 'SIO'),
 ('00028', '', 'Zakari Zotto', 'BTS SIO SLAM');
 
 --
@@ -692,7 +692,113 @@ INSERT INTO `utilisateur` (`id`, `login`, `password`, `idService`) VALUES
 ('00001', 'jean', 'jean', '0'),
 ('00002', 'bernard', 'bernard', '1');
 
--- --------------------------------------------------------
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `abonnement`
+--
+ALTER TABLE `abonnement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idRevue` (`idRevue`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commandedocument`
+--
+ALTER TABLE `commandedocument`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idLivreDvd` (`idLivreDvd`),
+  ADD KEY `idSuivi` (`idSuivi`);
+
+--
+-- Index pour la table `document`
+--
+ALTER TABLE `document`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idRayon` (`idRayon`),
+  ADD KEY `idPublic` (`idPublic`),
+  ADD KEY `idGenre` (`idGenre`);
+
+--
+-- Index pour la table `dvd`
+--
+ALTER TABLE `dvd`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `etat`
+--
+ALTER TABLE `etat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `exemplaire`
+--
+ALTER TABLE `exemplaire`
+  ADD PRIMARY KEY (`id`,`numero`),
+  ADD KEY `idEtat` (`idEtat`);
+
+--
+-- Index pour la table `genre`
+--
+ALTER TABLE `genre`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `livre`
+--
+ALTER TABLE `livre`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `livres_dvd`
+--
+ALTER TABLE `livres_dvd`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `public`
+--
+ALTER TABLE `public`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `rayon`
+--
+ALTER TABLE `rayon`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `revue`
+--
+ALTER TABLE `revue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `service`
+--
+ALTER TABLE `service`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `suivi`
+--
+ALTER TABLE `suivi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idService` (`idService`);
 
 --
 -- Contraintes pour les tables déchargées

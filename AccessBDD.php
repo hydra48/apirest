@@ -72,8 +72,6 @@ class AccessBDD {
                     return $this->selectAllCommandesDocument($id);
                 case "abonnement" :
                     return $this->selectAllAbonnementsRevues($id);
-                case "exemplairesdocument":
-                    return $this->selectAllExemplairesDocument($id);
                 case "utilisateur":
                     return $this->selectUtilisateur($id);
                 default:
@@ -206,23 +204,7 @@ class AccessBDD {
         $req .="order by a.dateFinAbonnement ASC; ";
         return $this->conn->queryAll($req);
     }   
-    
-    /**
-    * Récupération de tous les exemplaires d'un document
-    * @param string $id id du document concerné
-    * @return lignes de la requête
-    */
-    public function selectAllExemplairesDocument($id){
-    $param = array(
-                "id" => $id
-        );
-        $req = "select ex.id, ex.numero, ex.dateAchat, ex.photo, ex.idEtat, et.libelle ";
-        $req .= "from exemplaire ex JOIN etat et ON ex.idEtat = et.id ";
-        $req .= "where ex.id = :id ";
-        $req .= "order by ex.dateAchat DESC";       
-        return $this->conn->query($req, $param);
-    }
-    
+        
     /**
      * récupération d'un utilisateur
      * @param string $id de l'utilisateur
@@ -299,27 +281,7 @@ class AccessBDD {
     */ 
     public function updateOne($table, $id, $champs){
         if($this->conn != null && $champs != null){
-            switch($table){
-                case "exemplairesdocument":
-                    $champsExemplaire = [
-                        'id' => $champs['Id'],
-                        'numero' => $champs['Numero'],
-                        'dateAchat' => $champs['DateAchat'],
-                        'photo' => $champs['Photo'],
-                        'idEtat' => $champs['IdEtat']
-                    ];
-                    $requete = "UPDATE exemplaire SET ";
-                    foreach ($champsExemplaire as $key => $value) {
-                        $requete .= "$key=:$key,";
-                    }
-                    $requete = substr($requete, 0, strlen($requete)-1);
-                    $requete .= " WHERE id=:id AND numero=:numero;";
-                    $champsExemplaire['numero'] = $id;
-                    $updateExemplaire = $this->conn->execute($requete, $champsExemplaire);   
-                    if(!$updateExemplaire){
-                        return null;
-                    }
-                default:
+                            
                     $champs['id'] = $id;
                     $requete = "UPDATE $table SET ";
                     foreach ($champs as $key => $value) {
@@ -328,7 +290,7 @@ class AccessBDD {
                     $requete = substr($requete, 0, strlen($requete)-1);
                     $requete .= " WHERE id=:id;";
                     return $this->conn->execute($requete, $champs);                 
-            }
+            
         }
         else
         {
