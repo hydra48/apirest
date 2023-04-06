@@ -261,19 +261,6 @@ INSERT INTO `document` (`id`, `titre`, `image`, `idRayon`, `idPublic`, `idGenre`
 ('20005', 'Le seigneur des anneaux : le retour du roi', '', 'DF001', '00003', '10019');
 
 --
--- Déclencheurs `document`
---
-DROP TRIGGER IF EXISTS `delete_document_to_livres_dvd`;
-DELIMITER $$
-CREATE TRIGGER `delete_document_to_livres_dvd` BEFORE DELETE ON `document` FOR EACH ROW BEGIN
-  DELETE FROM livres_dvd WHERE id = OLD.id;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `dvd`
 --
 
@@ -296,29 +283,6 @@ INSERT INTO `dvd` (`id`, `synopsis`, `realisateur`, `duree`) VALUES
 ('20003', 'Un milliardaire et des généticiens créent des dinosaures à partir de clonage.', 'Steven Spielberg', 128),
 ('20004', 'Un informaticien réalise que le monde dans lequel il vit est une simulation gérée par des machines.', 'Les Wachowski', 136),
 ('20005', 'L\'anneau unique, forgé par Sauron, est porté par Fraudon qui l\'amène à Foncombe. De là, des représentants de peuples différents vont s\'unir pour aider Fraudon à amener l\'anneau à la montagne du Destin.', 'Peter Jackson', 350);
-
---
--- Déclencheurs `dvd`
---
-DROP TRIGGER IF EXISTS `delete_dvd_to_document`;
-DELIMITER $$
-CREATE TRIGGER `delete_dvd_to_document` AFTER DELETE ON `dvd` FOR EACH ROW BEGIN
-    DELETE FROM livres_dvd WHERE id=OLD.id ;
-    DELETE FROM document WHERE id=OLD.id ;
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `insert_dvd_to_livres_dvd`;
-DELIMITER $$
-CREATE TRIGGER `insert_dvd_to_livres_dvd` BEFORE INSERT ON `dvd` FOR EACH ROW BEGIN
-  IF NOT EXISTS (SELECT id FROM livres_dvd WHERE id = NEW.id) THEN
-    INSERT INTO livres_dvd (id) VALUES (NEW.id);
-  END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `etat`
@@ -412,19 +376,6 @@ INSERT INTO `exemplaire` (`id`, `numero`, `dateAchat`, `photo`, `idEtat`) VALUES
 ('20002', 2, '2023-02-27', '', '00001');
 
 --
--- Déclencheurs `exemplaire`
---
-DROP TRIGGER IF EXISTS `update_exemplaire_etat`;
-DELIMITER $$
-CREATE TRIGGER `update_exemplaire_etat` BEFORE UPDATE ON `exemplaire` FOR EACH ROW BEGIN
-    SET FOREIGN_KEY_CHECKS=0;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `genre`
 --
 
@@ -510,35 +461,6 @@ INSERT INTO `livre` (`id`, `ISBN`, `auteur`, `collection`) VALUES
 ('00028', '', 'Zakari Zotto', 'BTS SIO SLAM');
 
 --
--- Déclencheurs `livre`
---
-DROP TRIGGER IF EXISTS `delete_livre_to_document`;
-DELIMITER $$
-CREATE TRIGGER `delete_livre_to_document` AFTER DELETE ON `livre` FOR EACH ROW BEGIN
-DELETE FROM livres_dvd WHERE id=OLD.id ;
-DELETE FROM document WHERE id=OLD.id ;
-END
-$$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `insert_livre_to_livres_dvd`;
-DELIMITER $$
-CREATE TRIGGER `insert_livre_to_livres_dvd` BEFORE INSERT ON `livre` FOR EACH ROW BEGIN
-DECLARE cnt INT;
-SELECT COUNT(*) INTO cnt
-FROM livres_dvd
-WHERE id = NEW.id;
-
-IF cnt = 0 THEN
-INSERT INTO livres_dvd (id) VALUES
-(NEW.id);
-END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `livres_dvd`
 --
 
@@ -586,27 +508,6 @@ INSERT INTO `livres_dvd` (`id`) VALUES
 ('20003'),
 ('20004'),
 ('20005');
-
---
--- Déclencheurs `livres_dvd`
---
-DROP TRIGGER IF EXISTS `insert_livres_dvd_to_document`;
-DELIMITER $$
-CREATE TRIGGER `insert_livres_dvd_to_document` BEFORE INSERT ON `livres_dvd` FOR EACH ROW BEGIN
-DECLARE cnt INT;
-SELECT COUNT(*) INTO cnt
-FROM document
-WHERE id = NEW.id;
-
-IF cnt = 0 THEN
-INSERT INTO document (id) VALUES
-(NEW.id);
-END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `public`
@@ -790,6 +691,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `login`, `password`, `idService`) VALUES
 ('00001', 'jean', 'jean', '0'),
 ('00002', 'bernard', 'bernard', '1');
+
+-- --------------------------------------------------------
 
 --
 -- Contraintes pour les tables déchargées
