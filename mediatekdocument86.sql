@@ -214,16 +214,16 @@ CREATE TABLE IF NOT EXISTS `document` (
 
 INSERT INTO `document` (`id`, `titre`, `image`, `idRayon`, `idPublic`, `idGenre`) VALUES
 ('00001', 'Quand sort la recluse', '', 'LV003', '00002', '10014'),
-('00002', 'Un pays à l\'aube', '', 'BD001', '00004', '10018'),
+('00002', 'Un pays à laube', '', 'BD001', '00004', '10018'),
 ('00003', 'Et je danse aussi', '', 'LV002', '00003', '10013'),
-('00004', 'L\'armée furieuse', '', 'LV003', '00002', '10014'),
+('00004', 'Larmée furieuse', '', 'LV003', '00002', '10014'),
 ('00005', 'Les anonymes', '', 'LV001', '00002', '10014'),
 ('00006', 'La marque jaune', '', 'BD001', '00003', '10001'),
 ('00007', 'Dans les coulisses du musée', '', 'LV001', '00003', '10006'),
 ('00008', 'Histoire du juif errant', '', 'LV002', '00002', '10006'),
 ('00009', 'Pars vite et reviens tard', '', 'LV003', '00002', '10014'),
 ('00010', 'Le vestibule des causes perdues', '', 'LV001', '00002', '10006'),
-('00011', 'L\'île des oubliés', '', 'LV002', '00003', '10006'),
+('00011', 'Lîle des oubliés', '', 'LV002', '00003', '10006'),
 ('00012', 'La souris bleue', '', 'LV002', '00003', '10006'),
 ('00013', 'Sacré Pêre Noël', '', 'JN001', '00001', '10001'),
 ('00014', 'Mauvaise étoile', '', 'LV003', '00003', '10014'),
@@ -237,10 +237,10 @@ INSERT INTO `document` (`id`, `titre`, `image`, `idRayon`, `idPublic`, `idGenre`
 ('00022', 'Une part de Ciel', '', 'LV002', '00002', '10006'),
 ('00023', 'Le secret du janissaire', '', 'BD001', '00002', '10001'),
 ('00024', 'Pavillon noir', '', 'BD001', '00002', '10001'),
-('00025', 'L\'archipel du danger', '', 'BD001', '00002', '10001'),
+('00025', 'Larchipel du danger', '', 'BD001', '00002', '10001'),
 ('00026', 'La planète des singes', '', 'LV002', '00003', '10002'),
 ('00027', 'Sami est obligé de corriger ses erreurs', '', 'BD001', '00004', '10018'),
-('00028', 'Ajout d\'un livre', '', 'BL001', '00002', '10009'),
+('00028', 'Ajout dun livre', '', 'BL001', '00002', '10009'),
 ('10001', 'Arts Magazine', '', 'PR002', '00002', '10016'),
 ('10002', 'Alternatives Economiques', '', 'PR002', '00002', '10015'),
 ('10003', 'Challenges', '', 'PR002', '00002', '10015'),
@@ -248,14 +248,14 @@ INSERT INTO `document` (`id`, `titre`, `image`, `idRayon`, `idPublic`, `idGenre`
 ('10005', 'Les Echos', '', 'PR001', '00002', '10015'),
 ('10006', 'Le Monde', '', 'PR001', '00002', '10018'),
 ('10007', 'Telerama', '', 'PR002', '00002', '10016'),
-('10008', 'L\'Obs', '', 'PR002', '00002', '10018'),
-('10009', 'L\'Equipe', '', 'PR001', '00002', '10017'),
-('10010', 'L\'Equipe Magazine', '', 'PR002', '00002', '10017'),
+('10008', 'LObs', '', 'PR002', '00002', '10018'),
+('10009', 'LEquipe', '', 'PR001', '00002', '10017'),
+('10010', 'LEquipe Magazine', '', 'PR002', '00002', '10017'),
 ('10011', 'Geo', '', 'PR002', '00003', '10016'),
 ('10012', 'Femmes actuelles', '', 'DV003', '00002', '10016'),
 ('10013', 'Valeurs', '', 'PR001', '00003', '10018'),
-('20001', 'Star Wars 5 L\'empire contre attaque', '', 'DF001', '00003', '10002'),
-('20002', 'Le seigneur des anneaux : la communauté de l\'anneau', '', 'DF001', '00003', '10019'),
+('20001', 'Star Wars 5 Lempire contre attaque', '', 'DF001', '00003', '10002'),
+('20002', 'Le seigneur des anneaux : la communauté de lanneau', '', 'DF001', '00003', '10019'),
 ('20003', 'Jurassic Park', '', 'DF001', '00003', '10002'),
 ('20004', 'Matrix', '', 'DF001', '00003', '10002'),
 ('20005', 'Le seigneur des anneaux : le retour du roi', '', 'DF001', '00003', '10019');
@@ -279,10 +279,10 @@ CREATE TABLE IF NOT EXISTS `dvd` (
 
 INSERT INTO `dvd` (`id`, `synopsis`, `realisateur`, `duree`) VALUES
 ('20001', 'Luc est entraîné par Yoda pendant que Han et Leia tentent de se cacher dans la cité des nuages.', 'George Lucas', 124),
-('20002', 'L\'anneau unique, forgé par Sauron, est porté par Fraudon qui l\'amène à Foncombe. De là, des représentants de peuples différents vont s\'unir pour aider Fraudon à amener l\'anneau à la montagne du Destin.', 'Peter Jackson', 228),
+('20002', 'Lanneau unique, forgé par Sauron, est porté par Fraudon qui lamène à Foncombe. De là, des représentants de peuples différents vont ssunir pour aider Fraudon à amener lanneau à la montagne du Destin.', 'Peter Jackson', 228),
 ('20003', 'Un milliardaire et des généticiens créent des dinosaures à partir de clonage.', 'Steven Spielberg', 128),
 ('20004', 'Un informaticien réalise que le monde dans lequel il vit est une simulation gérée par des machines.', 'Les Wachowski', 136),
-('20005', 'L\'anneau unique, forgé par Sauron, est porté par Fraudon qui l\'amène à Foncombe. De là, des représentants de peuples différents vont s\'unir pour aider Fraudon à amener l\'anneau à la montagne du Destin.', 'Peter Jackson', 350);
+('20005', 'Lanneau unique, forgé par Sauron, est porté par Fraudon qui lamène à Foncombe. De là, des représentants de peuples différents vont sunir pour aider Fraudon à amener lanneau à la montagne du Destin.', 'Peter Jackson', 350);
 
 --
 -- Structure de la table `etat`
@@ -457,8 +457,8 @@ INSERT INTO `livre` (`id`, `ISBN`, `auteur`, `collection`) VALUES
 ('00024', '', 'Ayrolles - Masbou', 'De cape et de crocs'),
 ('00025', '', 'Ayrolles - Masbou', 'De cape et de crocs'),
 ('00026', '', 'Pierre Boulle', 'Julliard'),
-('00027', '1234569877896', 'Sami Deluc', 'SIO'),
-('00028', '', 'Zakari Zotto', 'BTS SIO SLAM');
+('00027', 'jean', 'jean', 'jean'),
+('00028', 'bernard', 'bernard', 'bernard');
 
 --
 -- Structure de la table `livres_dvd`
